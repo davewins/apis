@@ -1,0 +1,70 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "IMEI Checker",
+    "x-lastModified": "Oct 04, 2019 11:34AM PST",
+    "description": "Use this API to check a Phone's IMEI number and blacklist status"
+  },
+  "paths": {
+    "/imei/{imei}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/definitions/IMEICheckResponseSchema"
+            },
+            "examples": {
+              "application/json": {
+                "Devices": [
+                  {
+                    "Model": "iPhone 8"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "imei",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": ""
+          }
+        ],
+        "operationId": "getImei_imei",
+        "summary": "Call with the IMEI that you want to check."
+      }
+    }
+  },
+  "definitions": {
+    "IMEICheckResponseSchema": {
+      "type": "object",
+      "properties": {
+        "Manufacturer": {
+          "type": "string",
+          "default": "Apple Inc."
+        },
+        "Model": {
+          "type": "string",
+          "default": "iPhone 8"
+        },
+        "Memory": {
+          "type": "string",
+          "default": "128 GB"
+        },
+        "Status": {
+          "type": "string",
+          "default": "Lost/Stolen"
+        }
+      }
+    }
+  }
+}
