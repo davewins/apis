@@ -10,7 +10,7 @@ metadata:
     - url: https://github.com/davewins/apis
       title: GitHub Repo
       icon: github
-    - url: https://github.com/davewins/apis/sampleloanrequest-api.json
+    - url: https://github.com/davewins/apis/LoanRequest_1719230586979.json
       title: API Spec
       icon: code
 spec:
