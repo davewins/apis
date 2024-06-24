@@ -1,0 +1,71 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "LoanRequest",
+    "x-lastModified": "24 June 2024 12:49:41 pm (British Summer Time)"
+  },
+  "paths": {
+    "/loanRequest/{counterPartyID}/{loanAmount}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/definitions/LoanRequest"
+            },
+            "examples": {
+              "application/json": {
+                "counterPartyID": "Wales",
+                "loanRequestStatus": "Approved",
+                "loanAmount": 1000000
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "counterPartyID",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": ""
+          },
+          {
+            "name": "loanAmount",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "number",
+            "format": "float",
+            "default": null
+          }
+        ],
+        "operationId": "getLoadRequest_counterPartyID__loanAmount"
+      }
+    }
+  },
+  "definitions": {
+    "LoanRequest": {
+      "type": "object",
+      "properties": {
+        "counterPartyID": {
+          "type": "string",
+          "default": "Wales"
+        },
+        "loanRequestStatus": {
+          "type": "string",
+          "default": "Approved"
+        },
+        "loanAmount": {
+          "type": "integer",
+          "default": 1000000
+        }
+      }
+    }
+  }
+}
