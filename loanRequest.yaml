@@ -1,0 +1,22 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: 'loadRequestAPI'
+  description: 'An API that allows a counterparty to raise a loan request'
+  tags:
+    - finance
+    - rest
+  links:
+    - url: https://github.com/davewins/apis
+      title: GitHub Repo
+      icon: github
+    - url: https://github.com/davewins/apis/sampleloanrequest-api.json
+      title: API Spec
+      icon: code
+spec:
+  type: openapi
+  lifecycle: production
+  owner: finance-department
+  apiConsumedBy: ['component:car-order-ui']
+  definition:
+    $text: ./sampleloanrequest-api.json
