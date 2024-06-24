@@ -18,5 +18,3 @@ spec:
   lifecycle: production
   owner: finance-department
   apiConsumedBy: ['component:car-order-ui']
-  definition:
-    $text: ./sampleloanrequest-api.json
