@@ -19,4 +19,4 @@ spec:
   owner: finance-department
   apiConsumedBy: ['component:car-order-ui']
   definition:
-    $text: ./sampleLoanRequest-api.json
+    $text: ./LoanRequest_1719230586979.json
