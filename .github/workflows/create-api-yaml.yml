@@ -55,7 +55,7 @@ jobs:
           owner: finance-team
           lifecycle: experimental
           definition:
-             $text: "https://github.com/${{ github.repository }}/blob/master/${{ env.JSON_FILE }}"
+             $text: ./${{ env.JSON_FILE }}
         EOF
       env:
         JSON_FILE: ${{ env.JSON_FILE }}
