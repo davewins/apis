@@ -1,0 +1,71 @@
+name: Create or Update Catalog YAML and Import to Backstage
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create-catalog-yaml:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install jq
+      run: sudo apt-get install -y jq
+
+    - name: Find the JSON API file
+      id: find-json
+      run: |
+        JSON_FILE=$(git diff-tree --no-commit-id --name-only -r $GITHUB_SHA | grep '\.json$')
+        BASE_NAME=$(basename "$JSON_FILE" .json)
+        echo "JSON_FILE=$JSON_FILE" >> $GITHUB_ENV
+        echo "BASE_NAME=$BASE_NAME" >> $GITHUB_ENV
+
+    - name: Parse JSON and create catalog-info.yaml
+      run: |
+        NAME=$(jq -r '.name' ${{ env.JSON_FILE }})
+        DESCRIPTION=$(jq -r '.description' ${{ env.JSON_FILE }})
+        cat <<EOF > ${BASE_NAME}.yaml
+        apiVersion: backstage.io/v1alpha1
+        kind: Component
+        metadata:
+          name: $NAME
+          description: $DESCRIPTION
+          tags:
+            - example
+            - service
+        spec:
+          type: service
+          owner: my-team
+          lifecycle: production
+          system: my-system
+        EOF
+      env:
+        JSON_FILE: ${{ env.JSON_FILE }}
+        BASE_NAME: ${{ env.BASE_NAME }}
+      
+    - name: Commit changes
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
+        git add ${BASE_NAME}.yaml
+        git commit -m 'Automatically create/update ${BASE_NAME}.yaml'
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Update /etc/hosts
+      run: |
+        echo "your.fixed.ip.address k8smaster.local" | sudo tee -a /etc/hosts
+
+    - name: Import catalog-info.yaml to Backstage
+      run: |
+        curl -k -d '{"type":"url","target":"https://github.com/${{ github.repository }}/blob/main/${{ env.BASE_NAME }}.yaml"}' \
+             -H "Content-Type: application/json" \
+             -H "Authorization: Bearer ${{ secrets.BACKSTAGE_API_TOKEN }}" \
+             -X POST https://k8smaster.local/tibco/hub/api/catalog/locations
+      env:
+        BASE_NAME: ${{ env.BASE_NAME }}
