@@ -41,13 +41,12 @@ jobs:
           name: $NAME
           description: $DESCRIPTION
           tags:
-            - example
-            - service
+            - rest
+            - openapi
         spec:
-          type: service
-          owner: my-team
-          lifecycle: production
-          system: my-system
+          type: openapi
+          owner: finance-team
+          lifecycle: experimental
         EOF
       env:
         JSON_FILE: ${{ env.JSON_FILE }}
