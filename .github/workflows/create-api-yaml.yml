@@ -12,6 +12,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+      with:
+        fetch-depth: 2
 
     - name: Install jq
       run: sudo apt-get install -y jq
@@ -19,7 +21,7 @@ jobs:
     - name: Find the JSON API file
       id: find-json
       run: |
-        JSON_FILE=$(git ls-tree --name-only -r $GITHUB_SHA | grep '\.json$' || true)
+        JSON_FILE=$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | grep '\.json$' || true)
         if [ -z "$JSON_FILE" ]; then
           echo "No JSON file found in the commit."
           exit 1
