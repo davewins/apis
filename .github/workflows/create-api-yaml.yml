@@ -55,7 +55,7 @@ jobs:
           owner: finance-team
           lifecycle: experimental
           definition:
-             $text: ./${{ env.JSON_FILE }}
+             $text: "./${{ env.BASE_NAME }}.json"
         EOF
       env:
         JSON_FILE: ${{ env.JSON_FILE }}
