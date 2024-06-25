@@ -44,10 +44,10 @@ jobs:
             - rest
             - openapi
           links:
-            - url: https://github.com/davewins/apis
+            - url: "https://github.com/${{ github.repository }}"
               title: GitHub Repo 
               icon: github 
-            - url: ${{ env.JSON_FILE }}
+            - url: "https://github.com/${{ github.repository }}/blob/master/${{ env.JSON_FILE }}"
               title: API Spec 
               icon: code
         spec:
