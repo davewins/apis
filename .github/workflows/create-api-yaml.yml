@@ -36,13 +36,20 @@ jobs:
         DESCRIPTION=$(jq -r '.description' "${{ env.JSON_FILE }}")
         cat <<EOF > "${{ env.BASE_NAME }}.yaml"
         apiVersion: backstage.io/v1alpha1
-        kind: Component
+        kind: API
         metadata:
           name: $NAME
           description: $DESCRIPTION
           tags:
             - rest
             - openapi
+          links:
+            - url: https://github.com/mmussett/flogo-hello-world
+              title: GitHub Repo 
+              icon: github 
+            - url: https://github.com/mmussett/flogo-hello-world/blob/main/api-spec/openapi.yaml
+              title: API Spec 
+              icon: code
         spec:
           type: openapi
           owner: finance-team
