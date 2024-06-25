@@ -54,6 +54,8 @@ jobs:
           type: openapi
           owner: finance-team
           lifecycle: experimental
+          definition:
+             $text: ./${{ env.JSON_FILE }}
         EOF
       env:
         JSON_FILE: ${{ env.JSON_FILE }}
