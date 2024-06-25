@@ -3,7 +3,7 @@ name: Create or Update Catalog YAML and Import to Backstage
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   create-catalog-yaml:
