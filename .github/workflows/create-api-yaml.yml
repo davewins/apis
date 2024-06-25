@@ -59,7 +59,7 @@ jobs:
 
     - name: Update /etc/hosts
       run: |
-        echo "your.fixed.ip.address k8smaster.local" | sudo tee -a /etc/hosts
+        echo "${{ secrets.FIXED_IP_ADDRESS }} k8smaster.local" | sudo tee -a /etc/hosts
 
     - name: Import catalog-info.yaml to Backstage
       run: |
