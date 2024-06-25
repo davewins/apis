@@ -52,7 +52,7 @@ jobs:
               icon: code
         spec:
           type: openapi
-          owner: finance-team
+          owner: finance-department
           lifecycle: experimental
           definition:
              "\$text": "./${{ env.BASE_NAME }}.json"
