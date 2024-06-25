@@ -38,9 +38,9 @@ jobs:
             - example
             - service
         spec:
-          type: service
-          owner: my-team
-          lifecycle: production
+          type: api
+          owner: finance-department
+          lifecycle: experimental
           system: my-system
         EOF
       env:
