@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: null
+  description: null
+  tags:
+    - rest
+    - openapi
+spec:
+  type: openapi
+  owner: finance-team
+  lifecycle: experimental
