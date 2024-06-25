@@ -1,0 +1,19 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: NewLoan
+  description: New description goes here
+  tags:
+    - rest
+    - openapi
+  links:
+    - url: "https://github.com/davewins/apis"
+      title: GitHub Repo 
+      icon: github 
+    - url: "https://github.com/davewins/apis/blob/master/NewLoan_1719329134601.json"
+      title: API Spec 
+      icon: code
+spec:
+  type: openapi
+  owner: finance-team
+  lifecycle: experimental
