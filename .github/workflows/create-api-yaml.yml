@@ -3,7 +3,7 @@ name: Create or Update Catalog YAML and Import to Backstage
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   create-catalog-yaml:
@@ -19,7 +19,11 @@ jobs:
     - name: Find the JSON API file
       id: find-json
       run: |
-        JSON_FILE=$(git diff-tree --no-commit-id --name-only -r $GITHUB_SHA | grep '\.json$')
+        JSON_FILE=$(git ls-tree --name-only -r $GITHUB_SHA | grep '\.json$' || true)
+        if [ -z "$JSON_FILE" ]; then
+          echo "No JSON file found in the commit."
+          exit 1
+        fi
         BASE_NAME=$(basename "$JSON_FILE" .json)
         echo "JSON_FILE=$JSON_FILE" >> $GITHUB_ENV
         echo "BASE_NAME=$BASE_NAME" >> $GITHUB_ENV
@@ -38,9 +42,9 @@ jobs:
             - example
             - service
         spec:
-          type: api
-          owner: finance-department
-          lifecycle: experimental
+          type: service
+          owner: my-team
+          lifecycle: production
           system: my-system
         EOF
       env:
