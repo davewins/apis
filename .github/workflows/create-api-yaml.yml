@@ -35,14 +35,14 @@ jobs:
         NAME=$(jq -r '.info.title' "${{ env.JSON_FILE }}")
         DESCRIPTION=$(jq -r '.info.description' "${{ env.JSON_FILE }}")
 
-        # Extract tags JSON object from description
-        TAGS_JSON=$(echo "$DESCRIPTION" | grep -o '{"tags":.*}' | jq '.tags')
+        # Extract tags JSON object from description if it exists
+        TAGS_JSON=$(echo "$DESCRIPTION" | grep -oP '{"tags":.*?}' || echo '{}')
         
         # Extract owner and provided-by tags
-        OWNER=$(echo "$TAGS_JSON" | jq -r '.owner')
-        PROVIDED_BY=$(echo "$TAGS_JSON" | jq -r '.provided-by')
+        OWNER=$(echo "$TAGS_JSON" | jq -r '.owner // empty')
+        PROVIDED_BY=$(echo "$TAGS_JSON" | jq -r '.provided-by // empty')
 
-        # Check if TITLE, DESCRIPTION, OWNER, or PROVIDED_BY is empty or null
+        # Check if TITLE and DESCRIPTION are extracted
         if [[ -z "$NAME" ]]; then
           echo "Failed to extract title from JSON."
           exit 1
@@ -51,40 +51,34 @@ jobs:
           echo "Failed to extract description from JSON."
           exit 1
         fi
-        if [[ -z "$OWNER" ]]; then
-          echo "Failed to extract owner from JSON."
-          exit 1
-        fi
-        if [[ -z "$PROVIDED_BY" ]]; then
-          echo "Failed to extract provided-by from JSON."
-          exit 1
-        fi
-        
-        # Remove the tags JSON from description
-        # CLEAN_DESCRIPTION=$(echo "$DESCRIPTION" | sed 's/{"tags":.*}//')
 
-        cat <<EOF > "${{ env.BASE_NAME }}.yaml"
+        # Remove the tags JSON from description if present
+        CLEAN_DESCRIPTION=$(echo "$DESCRIPTION" | sed 's/{"tags":.*}//')
+
+        # Create catalog-info.yaml with correct links and definition format
+        cat > "${{ env.BASE_NAME }}.yaml" <<EOF
         apiVersion: backstage.io/v1alpha1
         kind: API
         metadata:
           name: $NAME
-          description: $DESCRIPTION
+          description: $CLEAN_DESCRIPTION
           tags:
             - rest
             - openapi
           links:
-            - url: "https://github.com/${{ github.repository }}"
-              title: GitHub Repo 
-              icon: github 
-            - url: "https://github.com/${{ github.repository }}/blob/master/${{ env.JSON_FILE }}"
-              title: API Spec 
+            - url: https://github.com/${{ github.repository }}
+              title: GitHub Repo
+              icon: github
+            - url: https://github.com/${{ github.repository }}/blob/master/${{ env.JSON_FILE }}
+              title: API Spec
               icon: code
         spec:
           type: openapi
-          owner: $OWNER
+          owner: ${OWNER:-"default-owner"}
           lifecycle: experimental
+          apiConsumedBy: ["component:${PROVIDED_BY:-"default-provider"}"]
           definition:
-             "\$text": "./${{ env.BASE_NAME }}.json"
+            "\$text": "./${{ env.BASE_NAME }}.json"
         EOF
       env:
         JSON_FILE: ${{ env.JSON_FILE }}
