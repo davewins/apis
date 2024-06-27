@@ -1,0 +1,23 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: counterParty
+  description: This counterParty API allows us to get the details of each counterParty. 
+}
+  tags:
+    - rest
+    - openapi
+  links:
+    - url: "https://github.com/davewins/apis"
+      title: GitHub Repo 
+      icon: github 
+    - url: "https://github.com/davewins/apis/blob/master/counterParty.json"
+      title: API Spec 
+      icon: code
+spec:
+  type: openapi
+  owner: finance-department
+  lifecycle: experimental
+  apiConsumedBy: ["component-counterPartySystem"]
+  definition:
+    "$text": "./counterParty.json"
