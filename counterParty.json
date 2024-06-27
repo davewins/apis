@@ -3,11 +3,11 @@
   "info": {
     "version": "1.0",
     "title": "counterParty",
-    "x-lastModified": "27 June 2024 1:26:31 pm (British Summer Time)",
+    "x-lastModified": "27 June 2024 1:51:07 pm (British Summer Time)",
     "description": "This counterParty API allows us to get the details of each counterParty."
   },
   "paths": {
-    "/ebx-dataservices/rest/data/v1/Bebrd/ebrd/root/counterparty": {
+    "/ebx-dataservices/rest/data/v1/Bebrd/ebrd/root/counterparty/{counterpartyID}": {
       "get": {
         "produces": [
           "application/json"
@@ -55,13 +55,12 @@
         },
         "parameters": [
           {
-            "name": "filter",
-            "in": "query",
+            "in": "path",
             "description": "",
-            "required": false,
+            "required": true,
             "type": "string",
             "format": "",
-            "default": "filter=counterpartyID='10001'"
+            "name": "counterpartyID"
           }
         ],
         "operationId": "getEbx-dataservicesRestDataV1BebrdEbrdRootCounterparty",
