@@ -3,7 +3,7 @@
   "info": {
     "version": "1.0",
     "title": "counterParty",
-    "x-lastModified": "27 June 2024 1:51:07 pm (British Summer Time)",
+    "x-lastModified": "27 June 2024 1:51:32 pm (British Summer Time)",
     "description": "This counterParty API allows us to get the details of each counterParty."
   },
   "paths": {
@@ -20,34 +20,24 @@
             },
             "examples": {
               "application/json": {
-                "rows": [
-                  {
-                    "label": "10001:Tanzania",
-                    "details": "http://3.255.73.222:8080/ebx-dataservices/rest/data/v1/Bebrd/ebrd/root/counterparty/10001",
-                    "content": {
-                      "counterpartyID": {
-                        "content": "10001"
-                      },
-                      "counterpartyName": {
-                        "content": "Tanzania"
-                      },
-                      "inceptionDate": {
-                        "content": "2024-06-27"
-                      },
-                      "counterpartyOnboardingStatus": {
-                        "content": "Pending"
-                      },
-                      "loanAmount": {
-                        "content": "1000000"
-                      }
-                    }
+                "label": "10001:Tanzania",
+                "details": "http://3.255.73.222:8080/ebx-dataservices/rest/data/v1/Bebrd/ebrd/root/counterparty/10001",
+                "content": {
+                  "counterpartyID": {
+                    "content": "10001"
+                  },
+                  "counterpartyName": {
+                    "content": "Tanzania"
+                  },
+                  "inceptionDate": {
+                    "content": "2024-06-27"
+                  },
+                  "counterpartyOnboardingStatus": {
+                    "content": "Pending"
+                  },
+                  "loanAmount": {
+                    "content": "1000000"
                   }
-                ],
-                "pagination": {
-                  "firstPage": null,
-                  "previousPage": null,
-                  "nextPage": null,
-                  "lastPage": null
                 }
               }
             }
@@ -55,12 +45,12 @@
         },
         "parameters": [
           {
+            "name": "counterpartyID",
             "in": "path",
             "description": "",
             "required": true,
             "type": "string",
-            "format": "",
-            "name": "counterpartyID"
+            "format": ""
           }
         ],
         "operationId": "getEbx-dataservicesRestDataV1BebrdEbrdRootCounterparty",
