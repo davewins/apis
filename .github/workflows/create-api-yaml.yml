@@ -36,46 +36,12 @@ jobs:
         DESCRIPTION=$(jq -r '.info.description' "${{ env.JSON_FILE }}")
         echo "Description = $DESCRIPTION"
 
-        # Extract tags JSON object from description
-        TAGS_JSON=$(echo "$DESCRIPTION" | sed -n 's/.*{\("tags":[^}]*}\).*/{\1}/p')
-        echo "TAGS_JSON = $TAGS_JSON"
-        
-        # Extract owner and provided-by tags
-        OWNER=$(echo "$TAGS_JSON" | jq -r '.tags.owner')
-        PROVIDED_BY=$(echo "$TAGS_JSON" | jq -r '.tags.apiProvidedBy')
-        LIFECYCLE=$(echo "$TAGS_JSON" | jq -r '.tags.lifecycle')
-
-        echo "Owner = $OWNER"
-        echo "Provided By = $PROVIDED_BY"
-        echo "Lifecycle = $LIFECYCLE"
-        # Check if NAME, DESCRIPTION, OWNER, or PROVIDED_BY is empty or null
-        if [[ -z "$NAME" ]]; then
-          echo "Failed to extract title from JSON."
-          exit 1
-        fi
-        if [[ -z "$DESCRIPTION" ]]; then
-          echo "Failed to extract description from JSON."
-          exit 1
-        fi
-        if [[ -z "$OWNER" ]]; then
-          echo "Failed to extract owner from JSON."
-          exit 1
-        fi
-        if [[ -z "$PROVIDED_BY" ]]; then
-          echo "Failed to extract provided-by from JSON."
-          exit 1
-        fi
-        
-        # Remove the tags JSON from description
-        CLEAN_DESCRIPTION=$(echo "$DESCRIPTION" | sed -e 's/{"tags":\[{[^}]+}\]}//g' -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
-        echo "Clean Description = $CLEAN_DESCRIPTION"
-
         cat <<EOF > "${{ env.BASE_NAME }}.yaml"
         apiVersion: backstage.io/v1alpha1
         kind: API
         metadata:
           name: $NAME
-          description: $CLEAN_DESCRIPTION
+          description: $DESCRIPTION
           tags:
             - rest
             - openapi
@@ -88,9 +54,8 @@ jobs:
               icon: code
         spec:
           type: openapi
-          owner: $OWNER
-          lifecycle: $LIFECYCLE
-          apiConsumedBy: ["component:${PROVIDED_BY}"]
+          owner: finance-department
+          lifecycle: experimental
           definition:
             "\$text": "./${{ env.BASE_NAME }}.json"
         EOF
