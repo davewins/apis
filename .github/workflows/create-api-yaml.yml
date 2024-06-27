@@ -12,8 +12,6 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-      with:
-        fetch-depth: 2
 
     - name: Install jq
       run: sudo apt-get install -y jq
@@ -21,7 +19,7 @@ jobs:
     - name: Find the JSON API file
       id: find-json
       run: |
-        JSON_FILE=$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | grep '\.json$' || true)
+        JSON_FILE=$(git ls-tree --name-only -r $GITHUB_SHA | grep '\.json$' || true)
         if [ -z "$JSON_FILE" ]; then
           echo "No JSON file found in the commit."
           exit 1
@@ -32,30 +30,62 @@ jobs:
 
     - name: Parse JSON and create catalog-info.yaml
       run: |
+        # Use jq to extract title and description from JSON_FILE
         NAME=$(jq -r '.info.title' "${{ env.JSON_FILE }}")
         DESCRIPTION=$(jq -r '.info.description' "${{ env.JSON_FILE }}")
-        cat <<EOF > "${{ env.BASE_NAME }}.yaml"
+
+        # Extract tags JSON object from description
+        TAGS_JSON=$(echo "$DESCRIPTION" | grep -o '{"tags":.*}' | jq '.tags')
+        
+        # Extract owner and provided-by tags
+        OWNER=$(echo "$TAGS_JSON" | jq -r '.owner')
+        PROVIDED_BY=$(echo "$TAGS_JSON" | jq -r '.provided-by')
+
+        # Check if TITLE, DESCRIPTION, OWNER, or PROVIDED_BY is empty or null
+        if [[ -z "$NAME" ]]; then
+          echo "Failed to extract title from JSON."
+          exit 1
+        fi
+        if [[ -z "$DESCRIPTION" ]]; then
+          echo "Failed to extract description from JSON."
+          exit 1
+        fi
+        if [[ -z "$OWNER" ]]; then
+          echo "Failed to extract owner from JSON."
+          exit 1
+        fi
+        if [[ -z "$PROVIDED_BY" ]]; then
+          echo "Failed to extract provided-by from JSON."
+          exit 1
+        fi
+        
+        # Remove the tags JSON from description
+        CLEAN_DESCRIPTION=$(echo "$DESCRIPTION" | sed 's/{"tags":.*}//')
+
+        # Create catalog-info.yaml with correct links and definition format
+        cat > "${{ env.BASE_NAME }}.yaml" <<EOF
         apiVersion: backstage.io/v1alpha1
         kind: API
         metadata:
           name: $NAME
-          description: $DESCRIPTION
+          description: $CLEAN_DESCRIPTION
           tags:
             - rest
             - openapi
           links:
-            - url: "https://github.com/${{ github.repository }}"
-              title: GitHub Repo 
-              icon: github 
-            - url: "https://github.com/${{ github.repository }}/blob/master/${{ env.JSON_FILE }}"
-              title: API Spec 
+            - url: https://github.com/davewins/apis
+              title: GitHub Repo
+              icon: github
+            - url: https://github.com/${{ github.repository }}/blob/master/${{ env.BASE_NAME }}.json
+              title: API Spec
               icon: code
         spec:
           type: openapi
-          owner: finance-department
-          lifecycle: experimental
+          lifecycle: production
+          owner: $OWNER
+          apiProvidedBy: ["component:$PROVIDED_BY"]
           definition:
-             "\$text": "./${{ env.BASE_NAME }}.json"
+            "\$text": "./${{ env.BASE_NAME }}.json"
         EOF
       env:
         JSON_FILE: ${{ env.JSON_FILE }}
@@ -77,8 +107,8 @@ jobs:
 
     - name: Import catalog-info.yaml to Backstage
       run: |
-        curl -k -d '{"type":"url","target":"https://github.com/${{ github.repository }}/blob/master/${{ env.BASE_NAME }}.yaml"}' \
-             -H "Content-Type: application/json" \
+        curl -k -d "@${{ env.BASE_NAME }}.yaml" \
+             -H "Content-Type: application/yaml" \
              -H "Authorization: Bearer ${{ secrets.BACKSTAGE_API_TOKEN }}" \
              -X POST https://k8smaster.local/tibco/hub/api/catalog/locations
       env:
