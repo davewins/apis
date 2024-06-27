@@ -2,8 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
   name: counterParty
-  description: This counterParty API allows us to get the details of each counterParty.  with a tag
-{"tags":{"owner":"finance-department","apiProvidedBy":"counterPartySystem","lifecycle":"experimental"}}
+  description: This counterParty API allows us to get the details of each counterParty.
   tags:
     - rest
     - openapi
@@ -18,6 +17,5 @@ spec:
   type: openapi
   owner: finance-department
   lifecycle: experimental
-  apiConsumedBy: ["component:counterPartySystem"]
   definition:
     "$text": "./counterParty.json"
