@@ -34,10 +34,10 @@ jobs:
       run: |
         NAME=$(jq -r '.info.title' "${{ env.JSON_FILE }}")
         DESCRIPTION=$(jq -r '.info.description' "${{ env.JSON_FILE }}")
-
+        echo "Description = $DESCRIPTION"
         # Extract tags JSON object from description
         TAGS_JSON=$(echo "$DESCRIPTION" | grep -oP '{"tags":\[\{[^}]+\}\]}' | jq '.tags[0]')
-        
+        echo "TAGS = $TAGS_JSON"
         # Extract owner and provided-by tags
         OWNER=$(echo "$TAGS_JSON" | jq -r '.owner')
         PROVIDED_BY=$(echo "$TAGS_JSON" | jq -r '.apiProvidedBy')
