@@ -43,7 +43,10 @@ jobs:
         # Extract owner and provided-by tags
         OWNER=$(echo "$TAGS_JSON" | jq -r '.tags[] | select(.owner) | .owner')
         PROVIDED_BY=$(echo "$TAGS_JSON" | jq -r '.tags[] | select(.apiProvidedBy) | .apiProvidedBy')
-
+        LIFECYCLE=$(echo "$TAGS_JSON" | jq -r '.tags[] | select(.lifecycle) | .lifecycle')
+        echo "Owner = $OWNER"
+        echo "Provided By = $PROVIDED_BY"
+        echo "Lifecycle = $LIFECYCLE"
         # Check if NAME, DESCRIPTION, OWNER, or PROVIDED_BY is empty or null
         if [[ -z "$NAME" ]]; then
           echo "Failed to extract title from JSON."
@@ -86,7 +89,7 @@ jobs:
           type: openapi
           owner: $OWNER
           lifecycle: experimental
-          apiConsumedBy: ["component:${PROVIDED_BY}"]
+          apiConsumedBy: ["component-${PROVIDED_BY}"]
           definition:
             "\$text": "./${{ env.BASE_NAME }}.json"
         EOF
