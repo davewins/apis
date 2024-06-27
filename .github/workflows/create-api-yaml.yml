@@ -64,29 +64,29 @@ jobs:
         CLEAN_DESCRIPTION=$(echo "$DESCRIPTION" | sed 's/{"tags":.*}//')
 
         cat <<EOF > "${{ env.BASE_NAME }}.yaml"
-apiVersion: backstage.io/v1alpha1
-kind: API
-metadata:
-  name: $NAME
-  description: $CLEAN_DESCRIPTION
-  tags:
-    - rest
-    - openapi
-  links:
-    - url: "https://github.com/${{ github.repository }}"
-      title: GitHub Repo 
-      icon: github 
-    - url: "https://github.com/${{ github.repository }}/blob/master/${{ env.JSON_FILE }}"
-      title: API Spec 
-      icon: code
-spec:
-  type: openapi
-  owner: $OWNER
-  lifecycle: experimental
-  apiConsumedBy: ["component:${PROVIDED_BY}"]
-  definition:
-    "\$text": "./${{ env.BASE_NAME }}.json"
-EOF
+        apiVersion: backstage.io/v1alpha1
+        kind: API
+        metadata:
+          name: $NAME
+          description: $CLEAN_DESCRIPTION
+          tags:
+            - rest
+            - openapi
+          links:
+            - url: "https://github.com/${{ github.repository }}"
+              title: GitHub Repo 
+              icon: github 
+            - url: "https://github.com/${{ github.repository }}/blob/master/${{ env.JSON_FILE }}"
+              title: API Spec 
+              icon: code
+        spec:
+          type: openapi
+          owner: $OWNER
+          lifecycle: experimental
+          apiConsumedBy: ["component:${PROVIDED_BY}"]
+          definition:
+            "\$text": "./${{ env.BASE_NAME }}.json"
+        EOF
       env:
         JSON_FILE: ${{ env.JSON_FILE }}
         BASE_NAME: ${{ env.BASE_NAME }}
