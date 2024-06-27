@@ -3,8 +3,8 @@
   "info": {
     "version": "1.0",
     "title": "counterParty",
-    "x-lastModified": "27 June 2024 12:43:36 pm (British Summer Time)",
-    "description": "This counterParty API allows us to get the details of each counterParty. with tags\n{\"tags\":[\"owner\":\"finance-department\",\"apiProvidedBy\":\"counterPartySystem\",\"lifecycle\":\"experimental\"]}"
+    "x-lastModified": "27 June 2024 12:46:38 pm (British Summer Time)",
+    "description": "This counterParty API allows us to get the details of each counterParty. \n{\"tags\":[\"owner\":\"finance-department\",\"apiProvidedBy\":\"counterPartySystem\",\"lifecycle\":\"experimental\"]}"
   },
   "paths": {
     "/ebx-dataservices/rest/data/v1/Bebrd/ebrd/root/counterparty": {
