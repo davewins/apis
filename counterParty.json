@@ -3,7 +3,7 @@
   "info": {
     "version": "1.0",
     "title": "counterParty",
-    "x-lastModified": "27 June 2024 1:51:32 pm (British Summer Time)",
+    "x-lastModified": "27 June 2024 2:53:24 pm (British Summer Time)",
     "description": "This counterParty API allows us to get the details of each counterParty."
   },
   "paths": {
@@ -16,7 +16,7 @@
           "200": {
             "description": "Success response",
             "schema": {
-              "$ref": "#/definitions/counterpartySchema"
+              "$ref": "#/definitions/newCounterPartySchema"
             },
             "examples": {
               "application/json": {
@@ -145,6 +145,70 @@
             },
             "lastPage": {
               "type": "null"
+            }
+          }
+        }
+      }
+    },
+    "newCounterPartySchema": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "default": "10001:Tanzania"
+        },
+        "details": {
+          "type": "string",
+          "default": "http://3.255.73.222:8080/ebx-dataservices/rest/data/v1/Bebrd/ebrd/root/counterparty/10001"
+        },
+        "content": {
+          "type": "object",
+          "properties": {
+            "counterpartyID": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "string",
+                  "default": "10001"
+                }
+              }
+            },
+            "counterpartyName": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "string",
+                  "default": "Tanzania"
+                }
+              }
+            },
+            "inceptionDate": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "string",
+                  "format": "date",
+                  "default": "2024-06-27"
+                }
+              }
+            },
+            "counterpartyOnboardingStatus": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "string",
+                  "default": "Pending"
+                }
+              }
+            },
+            "loanAmount": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "string",
+                  "default": "1000000"
+                }
+              }
             }
           }
         }
