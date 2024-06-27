@@ -35,12 +35,14 @@ jobs:
         NAME=$(jq -r '.info.title' "${{ env.JSON_FILE }}")
         DESCRIPTION=$(jq -r '.info.description' "${{ env.JSON_FILE }}")
         echo "Description = $DESCRIPTION"
+
         # Extract tags JSON object from description
-        TAGS_JSON=$(echo "$DESCRIPTION" | grep -oP '{"tags":\[\{[^}]+\}\]}' | jq '.tags[0]')
-        echo "TAGS = $TAGS_JSON"
+        TAGS_JSON=$(echo "$DESCRIPTION" | sed -n 's/.*{\("tags":[^}]*}\).*/{\1}/p')
+        echo "TAGS_JSON = $TAGS_JSON"
+        
         # Extract owner and provided-by tags
-        OWNER=$(echo "$TAGS_JSON" | jq -r '.owner')
-        PROVIDED_BY=$(echo "$TAGS_JSON" | jq -r '.apiProvidedBy')
+        OWNER=$(echo "$TAGS_JSON" | jq -r '.tags[] | select(.owner) | .owner')
+        PROVIDED_BY=$(echo "$TAGS_JSON" | jq -r '.tags[] | select(.apiProvidedBy) | .apiProvidedBy')
 
         # Check if NAME, DESCRIPTION, OWNER, or PROVIDED_BY is empty or null
         if [[ -z "$NAME" ]]; then
@@ -61,7 +63,8 @@ jobs:
         fi
         
         # Remove the tags JSON from description
-        CLEAN_DESCRIPTION=$(echo "$DESCRIPTION" | sed 's/{"tags":\[\{[^}]+\}\]}//')
+        CLEAN_DESCRIPTION=$(echo "$DESCRIPTION" | sed 's/{.*"tags":[^}]*}//')
+        echo "Clean Description = $CLEAN_DESCRIPTION"
 
         cat <<EOF > "${{ env.BASE_NAME }}.yaml"
         apiVersion: backstage.io/v1alpha1
