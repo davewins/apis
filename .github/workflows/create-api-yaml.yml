@@ -67,7 +67,7 @@ jobs:
         fi
         
         # Remove the tags JSON from description
-        CLEAN_DESCRIPTION=$(echo "$DESCRIPTION" | sed 's/{.*"tags":[^}]*}//')
+        CLEAN_DESCRIPTION=$(echo "$DESCRIPTION" | sed -e 's/{"tags":\[{[^}]+}\]}//g' -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
         echo "Clean Description = $CLEAN_DESCRIPTION"
 
         cat <<EOF > "${{ env.BASE_NAME }}.yaml"
@@ -89,8 +89,8 @@ jobs:
         spec:
           type: openapi
           owner: $OWNER
-          lifecycle: experimental
-          apiConsumedBy: ["component-${PROVIDED_BY}"]
+          lifecycle: $LIFECYCLE
+          apiConsumedBy: ["component:${PROVIDED_BY}"]
           definition:
             "\$text": "./${{ env.BASE_NAME }}.json"
         EOF
