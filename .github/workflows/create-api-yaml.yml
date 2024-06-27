@@ -36,13 +36,13 @@ jobs:
         DESCRIPTION=$(jq -r '.info.description' "${{ env.JSON_FILE }}")
 
         # Extract tags JSON object from description
-        TAGS_JSON=$(echo "$DESCRIPTION" | grep -oP '{"tags":.*}' | jq '.tags')
+        TAGS_JSON=$(echo "$DESCRIPTION" | grep -oP '{"tags":\[\{[^}]+\}\]}' | jq '.tags[0]')
         
         # Extract owner and provided-by tags
         OWNER=$(echo "$TAGS_JSON" | jq -r '.owner')
         PROVIDED_BY=$(echo "$TAGS_JSON" | jq -r '.apiProvidedBy')
 
-        # Check if TITLE, DESCRIPTION, OWNER, or PROVIDED_BY is empty or null
+        # Check if NAME, DESCRIPTION, OWNER, or PROVIDED_BY is empty or null
         if [[ -z "$NAME" ]]; then
           echo "Failed to extract title from JSON."
           exit 1
@@ -61,7 +61,7 @@ jobs:
         fi
         
         # Remove the tags JSON from description
-        CLEAN_DESCRIPTION=$(echo "$DESCRIPTION" | sed 's/{"tags":.*}//')
+        CLEAN_DESCRIPTION=$(echo "$DESCRIPTION" | sed 's/{"tags":\[\{[^}]+\}\]}//')
 
         cat <<EOF > "${{ env.BASE_NAME }}.yaml"
         apiVersion: backstage.io/v1alpha1
