@@ -41,9 +41,10 @@ jobs:
         echo "TAGS_JSON = $TAGS_JSON"
         
         # Extract owner and provided-by tags
-        OWNER=$(echo "$TAGS_JSON" | jq -r '.tags[] | select(.owner) | .owner')
-        PROVIDED_BY=$(echo "$TAGS_JSON" | jq -r '.tags[] | select(.apiProvidedBy) | .apiProvidedBy')
-        LIFECYCLE=$(echo "$TAGS_JSON" | jq -r '.tags[] | select(.lifecycle) | .lifecycle')
+        OWNER=$(echo "$TAGS_JSON" | jq -r '.tags.owner')
+        PROVIDED_BY=$(echo "$TAGS_JSON" | jq -r '.tags.apiProvidedBy')
+        LIFECYCLE=$(echo "$TAGS_JSON" | jq -r '.tags.lifecycle')
+
         echo "Owner = $OWNER"
         echo "Provided By = $PROVIDED_BY"
         echo "Lifecycle = $LIFECYCLE"
