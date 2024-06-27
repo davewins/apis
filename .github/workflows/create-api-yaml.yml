@@ -83,7 +83,6 @@ jobs:
           type: openapi
           owner: $OWNER
           lifecycle: experimental
-          apiConsumedBy: ["component\:$PROVIDED_BY"]
           definition:
              "\$text": "./${{ env.BASE_NAME }}.json"
         EOF
