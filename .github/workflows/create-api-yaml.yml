@@ -61,14 +61,14 @@ jobs:
         fi
         
         # Remove the tags JSON from description
-        CLEAN_DESCRIPTION=$(echo "$DESCRIPTION" | sed 's/{"tags":.*}//')
+        # CLEAN_DESCRIPTION=$(echo "$DESCRIPTION" | sed 's/{"tags":.*}//')
 
         cat <<EOF > "${{ env.BASE_NAME }}.yaml"
         apiVersion: backstage.io/v1alpha1
         kind: API
         metadata:
           name: $NAME
-          description: $CLEAN_DESCRIPTION
+          description: $DESCRIPTION
           tags:
             - rest
             - openapi
