@@ -111,8 +111,8 @@ spec:
       input:
         name: ${{ parameters.application }}
         # repoUrl: ${{ parameters.repoUrl | parseRepoUrl}}
-        job: Generate_BWCE_Project_Generic
-        jenkinsInstructions: ${{"&app_name=" + parameters.application + "&process_names=" + parameters.flow | join(",", "flow_name") + "&process_types=" + parameters.flow | join(",", "flow_type")}}
+        job: Generate_Flogo_API_Skeleton_Project
+        jenkinsInstructions: ${{"&app_name=" + parameters.application + "&api_name=" + parameters.api }}
 
 
 
@@ -137,9 +137,9 @@ spec:
       #      - title: Open in catalog
       #        icon: catalog
       #        entityRef: ${{ steps.register.output.entityRef }}
-#      - title: Open Jenkins Job
-#        icon: dashboard
-#        url: ${{ steps.triggerJenkinsJob.output.jobLink }}
+      - title: Open Jenkins Job
+        icon: dashboard
+        url: ${{ steps.triggerJenkinsJob.output.jobLink }}
 #      - title: Open in catalog
 #        icon: catalog
 #        entityRef: ${{ steps.register.output.entityRef }}
