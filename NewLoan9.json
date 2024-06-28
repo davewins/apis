@@ -3,7 +3,7 @@
   "info": {
     "version": "1.0",
     "title": "NewLoan9",
-    "x-lastModified": "26 June 2024 10:12:22 am (British Summer Time)",
+    "x-lastModified": "2024-06-26T09:15:49.000Z",
     "description": "New description goes here and now add a new part"
   },
   "paths": {
@@ -46,7 +46,7 @@
           }
         ],
         "operationId": "getLoanRequest_counterPartyId__amountRequested",
-        "description": "Here is a long description.2 and now some more",
+        "description": "Here is a long description.2 and now some more and even more of a description.",
         "summary": "Here is a summary"
       }
     }
