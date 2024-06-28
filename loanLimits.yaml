@@ -1,0 +1,21 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: loanLimits
+  description: This API returns the loan limits per counterparty
+  tags:
+    - rest
+    - openapi
+  links:
+    - url: "https://github.com/davewins/apis"
+      title: GitHub Repo 
+      icon: github 
+    - url: "https://github.com/davewins/apis/blob/master/loanLimits.json"
+      title: API Spec 
+      icon: code
+spec:
+  type: openapi
+  owner: finance-department
+  lifecycle: experimental
+  definition:
+    "$text": "./loanLimits.json"
