@@ -18,4 +18,4 @@ spec:
   owner: finance-department
   lifecycle: experimental
   definition:
-     "$text": "./NewLoan9.json"
+    "$text": "./NewLoan9.json"
