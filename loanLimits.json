@@ -3,11 +3,11 @@
   "info": {
     "version": "1.1",
     "title": "loanLimits",
-    "x-lastModified": "28 June 2024 12:45:06 pm (British Summer Time)",
+    "x-lastModified": "28 June 2024 12:59:03 pm (British Summer Time)",
     "description": "This API returns the loan limits per counterparty"
   },
   "paths": {
-    "/ebx-dataservices/rest/data/v1/Bebrd/ebrd/root/loanLimit/{counterpartyId}": {
+    "/ebx-dataservices/rest/data/v1/Bebrd/ebrd/root/loanLimits/{counterPartyId}": {
       "get": {
         "produces": [
           "application/json"
@@ -17,32 +17,12 @@
             "description": "Success response",
             "schema": {
               "$ref": "#/definitions/loanLimits"
-            },
-            "examples": {
-              "application/json": {
-                "label": "10002",
-                "details": "http://3.255.73.222:8080/ebx-dataservices/rest/data/v1/Bebrd/ebrd/root/loanLimits/10002",
-                "content": {
-                  "counterpartyID": {
-                    "content": "10002"
-                  },
-                  "authorizationDateStart": {
-                    "content": "2024-06-27"
-                  },
-                  "authorizationDateEnd": {
-                    "content": null
-                  },
-                  "loanLimit": {
-                    "content": "500000"
-                  }
-                }
-              }
             }
           }
         },
         "parameters": [
           {
-            "name": "counterpartyId",
+            "name": "counterPartyId",
             "in": "path",
             "description": "",
             "required": true,
@@ -50,8 +30,8 @@
             "format": ""
           }
         ],
-        "operationId": "getEbx-dataservicesRestDataV1BebrdEbrdRootLoanLimit_counterpartyId",
-        "description": "Use this method to return the limits per counterparty"
+        "operationId": "getEbx-dataservicesRestDataV1BebrdEbrdRootLoanLimits_counterPartyId",
+        "description": "Use this method to return the loanLimit details per counterParty"
       }
     }
   },
