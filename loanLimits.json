@@ -1,0 +1,114 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.1",
+    "title": "loanLimits",
+    "x-lastModified": "28 June 2024 12:45:06 pm (British Summer Time)",
+    "description": "This API returns the loan limits per counterparty"
+  },
+  "paths": {
+    "/ebx-dataservices/rest/data/v1/Bebrd/ebrd/root/loanLimit/{counterpartyId}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/definitions/loanLimits"
+            },
+            "examples": {
+              "application/json": {
+                "label": "10002",
+                "details": "http://3.255.73.222:8080/ebx-dataservices/rest/data/v1/Bebrd/ebrd/root/loanLimits/10002",
+                "content": {
+                  "counterpartyID": {
+                    "content": "10002"
+                  },
+                  "authorizationDateStart": {
+                    "content": "2024-06-27"
+                  },
+                  "authorizationDateEnd": {
+                    "content": null
+                  },
+                  "loanLimit": {
+                    "content": "500000"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "counterpartyId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": ""
+          }
+        ],
+        "operationId": "getEbx-dataservicesRestDataV1BebrdEbrdRootLoanLimit_counterpartyId",
+        "description": "Use this method to return the limits per counterparty"
+      }
+    }
+  },
+  "definitions": {
+    "loanLimits": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "default": "10002"
+        },
+        "details": {
+          "type": "string",
+          "default": "http://3.255.73.222:8080/ebx-dataservices/rest/data/v1/Bebrd/ebrd/root/loanLimits/10002"
+        },
+        "content": {
+          "type": "object",
+          "properties": {
+            "counterpartyID": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "string",
+                  "default": "10002"
+                }
+              }
+            },
+            "authorizationDateStart": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "string",
+                  "format": "date",
+                  "default": "2024-06-27"
+                }
+              }
+            },
+            "authorizationDateEnd": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "null"
+                }
+              }
+            },
+            "loanLimit": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "string",
+                  "default": "500000"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
