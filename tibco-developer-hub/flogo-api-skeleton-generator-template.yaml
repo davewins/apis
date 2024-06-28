@@ -2,7 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: flogo-api-skeleton-generator-template
-  title: Flogo API Skeleton Generator (V1)
+  title: Flogo API Skeleton Generator (V2)
   description: Create a new Flogo project that implements an API Skeleton
   tags:
     - tibco
