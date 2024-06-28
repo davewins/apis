@@ -2,7 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: flogo-api-skeleton-generator-template
-  title: Flogo API Skeleton Generator (V2)
+  title: Flogo API Skeleton Generator (V3)
   description: Create a new Flogo project that implements an API Skeleton
   tags:
     - tibco
@@ -140,6 +140,10 @@ spec:
       - title: Open Jenkins Job
         icon: dashboard
         url: ${{ steps.triggerJenkinsJob.output.jobLink }}
+      - title: Open in VSCode
+        icon: dashboard
+        url: 'vscode://vscode.git/clone?url=https://github.com/davewins/apis/'
+
 #      - title: Open in catalog
 #        icon: catalog
 #        entityRef: ${{ steps.register.output.entityRef }}
