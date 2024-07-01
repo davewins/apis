@@ -3,7 +3,8 @@
   "info": {
     "version": "1.0",
     "title": "TestNewAPI",
-    "x-lastModified": "01 July 2024 2:44:09 pm (British Summer Time)"
+    "x-lastModified": "01 July 2024 2:58:29 pm (British Summer Time)",
+    "description": "Must have a description!"
   },
   "paths": {
     "/loanRequest/{counterPartyId}/{amountRequested}": {
