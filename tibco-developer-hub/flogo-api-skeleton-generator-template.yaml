@@ -2,7 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: flogo-api-skeleton-generator-template
-  title: Flogo API Skeleton Generator (V4)
+  title: Flogo API Skeleton Generator (V5)
   description: Create a new Flogo project that implements an API Skeleton
   tags:
     - tibco
@@ -70,7 +70,8 @@ spec:
           #destination: ${{ parameters.repoUrl | parseRepoUrl }}
           owner: ${{ parameters.owner }}
           # system: ${{ parameters.system }}
-          api: ${{ parameters.api | replace("api:default/", "") }}
+          # api: ${{ parameters.api | replace("api:default/", "") }}
+          api: 'NewLoan9.yaml'
 
 
     #    - id: publish
@@ -90,13 +91,13 @@ spec:
         title: ${{ parameters.application }}
         description: This PR adds a new Flogo API Skeleton Application to this Repository.
 
-#    - id: register
-#      name: Register
-#      action: catalog:register
-#      input:
-#        # repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
-#        # catalogInfoPath: "/catalog-info.yaml"
-#        catalogInfoUrl: ${{ "https://github.com/hpeters83/BWCE-Pattern-Template/blob/" + parameters.application + "/TemplateOutput/" + parameters.application + "/catalog-info.yaml" }}
+    - id: register
+      name: Register
+      action: catalog:register
+      input:
+        # repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        # catalogInfoPath: "/catalog-info.yaml"
+        catalogInfoUrl: ${{ "https://github.com/davewins/apis/blob/" + parameters.application + "/flogo-output/" + parameters.application + "/catalog-info.yaml" }}
 
     - id: Log Debug
       name: Debug Log
@@ -131,13 +132,13 @@ spec:
     links:
       - title: European Bank for Reconstruction and Development (EBRD)
         url: 'https://www.ebrd.com/home'
-#      - title: Repository (Pull Request)
-#        url: ${{ steps.cpr.output.remoteUrl }}
+      - title: Repository (Pull Request)
+        url: ${{ steps.cpr.output.remoteUrl }}
       #      - title: Repository
       #        url: ${{ steps.publish.output.remoteUrl }}
-      #      - title: Open in catalog
-      #        icon: catalog
-      #        entityRef: ${{ steps.register.output.entityRef }}
+      - title: Open in catalog
+        icon: catalog
+        entityRef: ${{ steps.register.output.entityRef }}
       - title: Open Jenkins Job
         icon: dashboard
         url: ${{ steps.triggerJenkinsJob.output.jobLink }}
