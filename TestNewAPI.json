@@ -1,0 +1,70 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "TestNewAPI",
+    "x-lastModified": "01 July 2024 2:44:09 pm (British Summer Time)"
+  },
+  "paths": {
+    "/loanRequest/{counterPartyId}/{amountRequested}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/definitions/loanSchema"
+            },
+            "examples": {
+              "application/json": {
+                "counterPartyId": "10001",
+                "status": "Approved",
+                "amountApproved": 10000
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "counterPartyId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": ""
+          },
+          {
+            "name": "amountRequested",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": ""
+          }
+        ],
+        "operationId": "getLoanRequest_counterPartyId__amountRequested"
+      }
+    }
+  },
+  "definitions": {
+    "loanSchema": {
+      "type": "object",
+      "properties": {
+        "counterPartyId": {
+          "type": "string",
+          "default": "10001"
+        },
+        "status": {
+          "type": "string",
+          "default": "Approved"
+        },
+        "amountApproved": {
+          "type": "integer",
+          "default": 10000
+        }
+      }
+    }
+  }
+}
