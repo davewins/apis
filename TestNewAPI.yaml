@@ -1,8 +1,8 @@
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: NewLoan4
-  description: New description goes here
+  name: TestNewAPI
+  description: Must have a description.
   tags:
     - rest
     - openapi
@@ -10,12 +10,12 @@ metadata:
     - url: "https://github.com/davewins/apis"
       title: GitHub Repo 
       icon: github 
-    - url: "https://github.com/davewins/apis/blob/master/NewLoan5.json"
+    - url: "https://github.com/davewins/apis/blob/master/TestNewAPI.json"
       title: API Spec 
       icon: code
 spec:
   type: openapi
-  owner: finance-team
+  owner: finance-department
   lifecycle: experimental
   definition:
-     : ./NewLoan5.json
+    "$text": "./TestNewAPI.json"
