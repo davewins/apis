@@ -2,7 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: flogo-api-skeleton-generator-template
-  title: Flogo API Skeleton Generator (V3)
+  title: Flogo API Skeleton Generator (V4)
   description: Create a new Flogo project that implements an API Skeleton
   tags:
     - tibco
@@ -58,18 +58,19 @@ spec:
   # By adding the following and fetching from an absolute URL you can
   # add in the docs template
   steps:
-#    - id: fetch
-#      name: BWCE Skeleton
-#      action: fetch:template
-#      input:
-#        url: ./skeleton-flogo-api-generator
-#        targetPath: ./TemplateOutput/${{ parameters.application }}/
-#        values:
-#          name: ${{ parameters.application }}
-#          description: ${{ parameters.description }}
-#          #destination: ${{ parameters.repoUrl | parseRepoUrl }}
-#          owner: ${{ parameters.owner }}
-    #          system: ${{ parameters.system }}
+    - id: fetch
+      name: BWCE Skeleton
+      action: fetch:template
+      input:
+        url: ./skeleton-flogo-api-generator
+        targetPath: ./flogo-output/${{ parameters.application }}/
+        values:
+          name: ${{ parameters.application }}
+          description: ${{ parameters.description }}
+          #destination: ${{ parameters.repoUrl | parseRepoUrl }}
+          owner: ${{ parameters.owner }}
+          # system: ${{ parameters.system }}
+          api: ${{ parameters.api | replace("api:default/", "") }}
 
 
     #    - id: publish
@@ -79,15 +80,15 @@ spec:
     #        allowedHosts: ["github.com"]
     #        description: This is ${{ parameters.name }}
     #        repoUrl: ${{ parameters.repoUrl }}
-#    - id: cpr
-#      name: Create Pull Request in Current Repo
-#      action: publish:github:pull-request
-#      input:
-#        # repoUrl: ${{ parameters.repoHost }}?owner=${{ parameters.repoOwner }}&repo=${{ parameters.repoSlug }}
-#        repoUrl: github.com?owner=hpeters83&repo=BWCE-Pattern-Template
-#        branchName: ${{ parameters.application }}
-#        title: ${{ parameters.application }}
-#        description: This PR adds a new BW Application to this Repository.
+    - id: cpr
+      name: Create Pull Request in Current Repo
+      action: publish:github:pull-request
+      input:
+        # repoUrl: ${{ parameters.repoHost }}?owner=${{ parameters.repoOwner }}&repo=${{ parameters.repoSlug }}
+        repoUrl: github.com?owner=davewins&repo=apis
+        branchName: ${{ parameters.application }}
+        title: ${{ parameters.application }}
+        description: This PR adds a new Flogo API Skeleton Application to this Repository.
 
 #    - id: register
 #      name: Register
