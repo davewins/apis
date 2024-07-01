@@ -1,0 +1,21 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: TestNewAPI
+  description: null
+  tags:
+    - rest
+    - openapi
+  links:
+    - url: "https://github.com/davewins/apis"
+      title: GitHub Repo 
+      icon: github 
+    - url: "https://github.com/davewins/apis/blob/master/TestNewAPI.json"
+      title: API Spec 
+      icon: code
+spec:
+  type: openapi
+  owner: finance-department
+  lifecycle: experimental
+  definition:
+    "$text": "./TestNewAPI.json"
