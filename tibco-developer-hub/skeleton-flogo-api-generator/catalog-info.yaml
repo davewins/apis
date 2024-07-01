@@ -26,4 +26,4 @@ metadata:
   name: ${{values.name}}-api-location
 spec:
   targets:
-    - ./../${{values.api}}.yaml
+    - ./../../${{values.api}}.yaml
