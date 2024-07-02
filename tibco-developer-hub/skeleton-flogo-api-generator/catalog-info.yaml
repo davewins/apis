@@ -18,13 +18,13 @@ spec:
   type: service
   lifecycle: development
   owner: ${{values.owner | dump}}
-  # providesApis: ['${{values.name}}-api']
-  providesApis: ['NewLoan9']
----
-apiVersion: backstage.io/v1alpha1
-kind: Location
-metadata:
-  name: ${{values.name}}-api-location
-spec:
-  targets:
-    - ./../../${{values.api}}.yaml
+  providesApis: ['${{values.api}}']
+  # providesApis: ['NewLoan9']
+#---
+#apiVersion: backstage.io/v1alpha1
+#kind: Location
+#metadata:
+#  name: ${{values.name}}-api-location
+#spec:
+#  targets:
+#    - ./../../${{values.api}}.yaml
