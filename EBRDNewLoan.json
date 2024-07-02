@@ -1,0 +1,71 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "EBRDNewLoan",
+    "x-lastModified": "02 July 2024 11:43:18 am (British Summer Time)",
+    "description": "Here is a description"
+  },
+  "paths": {
+    "/loanRequest/{counterPartyId}/{amountRequested}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/definitions/LoanApprovalSchema"
+            },
+            "examples": {
+              "application/json": {
+                "counterPartyId": "10001",
+                "status": "Approved",
+                "amountApproved": 10000
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "counterPartyId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": ""
+          },
+          {
+            "name": "amountRequested",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": ""
+          }
+        ],
+        "operationId": "getLoanRequest_counterPartyId__amountRequested"
+      }
+    }
+  },
+  "definitions": {
+    "LoanApprovalSchema": {
+      "type": "object",
+      "properties": {
+        "counterPartyId": {
+          "type": "string",
+          "default": "10001"
+        },
+        "status": {
+          "type": "string",
+          "default": "Approved"
+        },
+        "amountApproved": {
+          "type": "integer",
+          "default": 10000
+        }
+      }
+    }
+  }
+}
