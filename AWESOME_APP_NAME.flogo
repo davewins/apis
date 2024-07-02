@@ -67,6 +67,63 @@
           "name": "loanRequest_counterPartyId/{amountRequested}_GET"
         }
       ]
+    },
+    {
+      "ref": "#rest",
+      "name": "NewLoan9_1",
+      "description": "New description goes here and now add a new part + 2",
+      "settings": {
+        "port": 9999,
+        "APISpecUpdate": true,
+        "swagger": {
+          "filename": "newloan9.json",
+          "content": "data:application/json;base64,eyJzd2FnZ2VyIjoiMi4wIiwiaW5mbyI6eyJ2ZXJzaW9uIjoiMS4wIiwidGl0bGUiOiJOZXdMb2FuOSIsIngtbGFzdE1vZGlmaWVkIjoiMjAyNC0wNi0yOFQxNDowNjowMy4wMDBaIiwiZGVzY3JpcHRpb24iOiJOZXcgZGVzY3JpcHRpb24gZ29lcyBoZXJlIGFuZCBub3cgYWRkIGEgbmV3IHBhcnQgKyAyIn0sInBhdGhzIjp7Ii9sb2FuUmVxdWVzdC97Y291bnRlclBhcnR5SWR9L3thbW91bnRSZXF1ZXN0ZWR9Ijp7ImdldCI6eyJwcm9kdWNlcyI6WyJhcHBsaWNhdGlvbi9qc29uIl0sInJlc3BvbnNlcyI6eyIyMDAiOnsiZGVzY3JpcHRpb24iOiJTdWNjZXNzIHJlc3BvbnNlIiwic2NoZW1hIjp7InR5cGUiOiJvYmplY3QiLCJwcm9wZXJ0aWVzIjp7ImNvdW50ZXJQYXJ0eUlkIjp7InR5cGUiOiJzdHJpbmciLCJkZWZhdWx0IjoiMTIzIn0sInN0YXR1cyI6eyJ0eXBlIjoic3RyaW5nIiwiZGVmYXVsdCI6IlBlbmRpbmcifSwiYW1vdW50QXBwcm92ZWQiOnsidHlwZSI6ImludGVnZXIiLCJkZWZhdWx0IjowfX19LCJleGFtcGxlcyI6eyJhcHBsaWNhdGlvbi9qc29uIjp7ImNvdW50ZXJQYXJ0eUlkIjoiMTIzIiwic3RhdHVzIjoiUGVuZGluZyIsImFtb3VudEFwcHJvdmVkIjowfX19fSwicGFyYW1ldGVycyI6W3sibmFtZSI6ImNvdW50ZXJQYXJ0eUlkIiwiaW4iOiJwYXRoIiwiZGVzY3JpcHRpb24iOiIiLCJyZXF1aXJlZCI6dHJ1ZSwidHlwZSI6InN0cmluZyIsImZvcm1hdCI6IiJ9LHsibmFtZSI6ImFtb3VudFJlcXVlc3RlZCIsImluIjoicGF0aCIsImRlc2NyaXB0aW9uIjoiIiwicmVxdWlyZWQiOnRydWUsInR5cGUiOiJzdHJpbmciLCJmb3JtYXQiOiIifV0sIm9wZXJhdGlvbklkIjoiZ2V0TG9hblJlcXVlc3RfY291bnRlclBhcnR5SWRfX2Ftb3VudFJlcXVlc3RlZCIsImRlc2NyaXB0aW9uIjoiSGVyZSBpcyBhIGxvbmcgZGVzY3JpcHRpb24uMiBhbmQgbm93IHNvbWUgbW9yZSBhbmQgZXZlbiBtb3JlIG9mIGEgZGVzY3JpcHRpb24uIiwic3VtbWFyeSI6IkhlcmUgaXMgYSBzdW1tYXJ5In19fSwiZGVmaW5pdGlvbnMiOnsiUmVzcG9uc2VTY2hlbWEiOnsidHlwZSI6Im9iamVjdCIsInByb3BlcnRpZXMiOnsiY291bnRlclBhcnR5SWQiOnsidHlwZSI6InN0cmluZyIsImRlZmF1bHQiOiIxMjMifSwic3RhdHVzIjp7InR5cGUiOiJzdHJpbmciLCJkZWZhdWx0IjoiUGVuZGluZyJ9LCJhbW91bnRBcHByb3ZlZCI6eyJ0eXBlIjoiaW50ZWdlciIsImRlZmF1bHQiOjB9fX19fQ=="
+        },
+        "swaggerVersion": "",
+        "apiVersion": "1.0.0",
+        "secureConnection": false
+      },
+      "id": "ReceiveHTTPMessage_1",
+      "handlers": [
+        {
+          "description": "Handler for loanRequest/{counterPartyId}/{amountRequested} GET",
+          "settings": {
+            "APISpecPath": "/loanRequest/{counterPartyId}/{amountRequested}",
+            "Method": "GET",
+            "reqType": "application/json",
+            "Path": "/loanRequest/{counterPartyId}/{amountRequested}",
+            "OutputValidation": false
+          },
+          "action": {
+            "ref": "github.com/project-flogo/flow",
+            "settings": {
+              "flowURI": "res://flow:loanRequest_counterPartyId/{amountRequested}_GET_1"
+            }
+          },
+          "reply": {
+            "code": 200,
+            "configureResponseCodes": false,
+            "message": {}
+          },
+          "schemas": {
+            "reply": {
+              "responseBody": {
+                "type": "json",
+                "value": "{\"type\":\"object\",\"properties\":{\"body\":{\"type\":\"any\"},\"headers\":{\"type\":\"object\"}}}",
+                "fe_metadata": "{\"type\":\"object\",\"properties\":{\"body\":{\"type\":\"any\"},\"headers\":{\"type\":\"object\"}}}"
+              }
+            },
+            "output": {
+              "headers": {
+                "type": "json",
+                "value": "{\"type\":\"object\",\"properties\":{\"Accept\":{\"type\":\"string\",\"visible\":false},\"Accept-Charset\":{\"type\":\"string\",\"visible\":false},\"Accept-Encoding\":{\"type\":\"string\",\"visible\":false},\"Content-Type\":{\"type\":\"string\",\"visible\":false},\"Content-Length\":{\"type\":\"string\",\"visible\":false},\"Connection\":{\"type\":\"string\",\"visible\":false},\"Cookie\":{\"type\":\"string\",\"visible\":false},\"Pragma\":{\"type\":\"string\",\"visible\":false}},\"required\":[]}",
+                "fe_metadata": "[{\"parameterName\":\"Accept\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Accept-Charset\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Accept-Encoding\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Content-Type\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Content-Length\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Connection\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Cookie\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Pragma\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false}]"
+              }
+            }
+          },
+          "name": "loanRequest_counterPartyId/{amountRequested}_GET_1"
+        }
+      ]
     }
   ],
   "resources": [
@@ -74,6 +131,30 @@
       "id": "flow:loanRequest_counterPartyId/{amountRequested}_GET",
       "data": {
         "name": "loanRequest_counterPartyId/{amountRequested}_GET",
+        "description": "Flow for loanRequest/{counterPartyId}/{amountRequested} GET",
+        "links": [],
+        "tasks": [
+          {
+            "id": "StartActivity",
+            "name": "StartActivity",
+            "description": "NoOp Activity",
+            "activity": {
+              "ref": "#noop"
+            }
+          }
+        ],
+        "fe_metadata": "eyJTdGFydEFjdGl2aXR5Ijp7IngiOjEwMCwieSI6MTAwfX0=",
+        "metadata": {
+          "input": [],
+          "output": [],
+          "fe_metadata": {}
+        }
+      }
+    },
+    {
+      "id": "flow:loanRequest_counterPartyId/{amountRequested}_GET_1",
+      "data": {
+        "name": "loanRequest_counterPartyId/{amountRequested}_GET_1",
         "description": "Flow for loanRequest/{counterPartyId}/{amountRequested} GET",
         "links": [],
         "tasks": [
