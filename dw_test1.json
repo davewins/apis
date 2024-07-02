@@ -1,0 +1,71 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "dw_test1",
+    "x-lastModified": "02 July 2024 10:24:31 am (British Summer Time)",
+    "description": "Use this api"
+  },
+  "paths": {
+    "/loanRequest/{counterPartyId}/{amountRequested}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/definitions/test"
+            },
+            "examples": {
+              "application/json": {
+                "counterPartyId": "10001",
+                "status": "Approved",
+                "amountApproved": 10000
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "counterPartyId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": ""
+          },
+          {
+            "name": "amountRequested",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": ""
+          }
+        ],
+        "operationId": "getLoanRequest_counterPartyId__amountRequested"
+      }
+    }
+  },
+  "definitions": {
+    "test": {
+      "type": "object",
+      "properties": {
+        "counterPartyId": {
+          "type": "string",
+          "default": "10001"
+        },
+        "status": {
+          "type": "string",
+          "default": "Approved"
+        },
+        "amountApproved": {
+          "type": "integer",
+          "default": 10000
+        }
+      }
+    }
+  }
+}
