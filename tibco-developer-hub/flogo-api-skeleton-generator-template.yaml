@@ -130,8 +130,10 @@ spec:
 
   output:
     links:
-      - title: European Bank for Reconstruction and Development (EBRD)
-        url: 'https://www.ebrd.com/home'
+#      - title: European Bank for Reconstruction and Development (EBRD)
+#        url: 'https://www.ebrd.com/home'
+      - title: Ayvens
+        url: 'https://www.ayvens.com/'
       - title: Repository (Pull Request)
         url: ${{ steps.cpr.output.remoteUrl }}
       #      - title: Repository
