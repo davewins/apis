@@ -59,7 +59,7 @@ spec:
   # add in the docs template
   steps:
     - id: fetch
-      name: BWCE Skeleton
+      name: FLOGO Skeleton
       action: fetch:template
       input:
         url: ./skeleton-flogo-api-generator
@@ -132,8 +132,10 @@ spec:
     links:
 #      - title: European Bank for Reconstruction and Development (EBRD)
 #        url: 'https://www.ebrd.com/home'
-      - title: Ayvens
-        url: 'https://www.ayvens.com/'
+#      - title: Ayvens
+#        url: 'https://www.ayvens.com/'
+      - title: Lufthansa
+        url: 'https://www.lufthansa.com/nl/en/homepage'
       - title: Repository (Pull Request)
         url: ${{ steps.cpr.output.remoteUrl }}
       #      - title: Repository
