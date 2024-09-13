@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
   name: NewLoan9
-  description: New description goes here and now add a new part + 5
+  description: New description goes here and now add a new part + 6
   tags:
     - rest
     - openapi
