@@ -3,7 +3,7 @@
   "info": {
     "version": "3.0",
     "title": "IMEI Checker",
-    "x-lastModified": "Oct 04, 2019 11:34AM PST",
+    "x-lastModified": "2020-11-12T15:51:54.000Z",
     "description": "Use this API to check a Phone's IMEI number and blacklist status"
   },
   "paths": {
