@@ -3,8 +3,8 @@
   "info": {
     "version": "1.0",
     "title": "NewLoan9",
-    "x-lastModified": "2024-06-28T14:06:03.000Z",
-    "description": "New description goes here and now add a new part + 2"
+    "x-lastModified": "2024-06-28T15:20:12.000Z",
+    "description": "New description goes here and now add a new part + 3"
   },
   "paths": {
     "/loanRequest/{counterPartyId}/{amountRequested}": {
