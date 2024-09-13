@@ -82,11 +82,13 @@ jobs:
         curl -k -d '{"type":"url","target":"https://github.com/${{ github.repository }}/blob/master/${{ env.BASE_NAME }}.yaml"}' \
              -H "Content-Type: application/json" \
              -H "Authorization: Bearer ${{ secrets.BACKSTAGE_API_TOKEN }}" \
-             -X POST https://k8smaster.local/tibco/hub/api/catalog/locations
+             -X POST https://k8smaster.local/tibco/hub/oauth2/start?rd=%2Ftibco%2Fhub%2Fapi%2Fcatalog%2Flocations
+             #-X POST https://k8smaster.local/tibco/hub/api/catalog/locations
         # Import into Hugo's backstage
         curl -k -d '{"type":"url","target":"https://github.com/${{ github.repository }}/blob/master/${{ env.BASE_NAME }}.yaml"}' \
              -H "Content-Type: application/json" \
              -H "Authorization: Bearer ${{ secrets.HUGOS_SECRET_TOKEN }}" \
-             -X POST ${{ secrets.HUGOS_BACKSTAGE }}/api/catalog/locations      
+             -X POST ${{ secrets.HUGOS_BACKSTAGE }}/tibco/hub/oauth2/start?rd=%2Ftibco%2Fhub%2Fapi%2Fcatalog%2Flocations
+             #-X POST ${{ secrets.HUGOS_BACKSTAGE }}/api/catalog/locations      
       env:
         BASE_NAME: ${{ env.BASE_NAME }}
