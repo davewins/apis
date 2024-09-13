@@ -1,0 +1,21 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: IMEI Checker
+  description: Use this API to check a Phone's IMEI number and blacklist status
+  tags:
+    - rest
+    - openapi
+  links:
+    - url: "https://github.com/davewins/apis"
+      title: GitHub Repo 
+      icon: github 
+    - url: "https://github.com/davewins/apis/blob/master/IMEI Checker.json"
+      title: API Spec 
+      icon: code
+spec:
+  type: openapi
+  owner: finance-department
+  lifecycle: experimental
+  definition:
+    "$text": "./IMEI Checker.json"
