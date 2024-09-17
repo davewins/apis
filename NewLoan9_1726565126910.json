@@ -1,0 +1,73 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "NewLoanAPI",
+    "x-lastModified": "17 September 2024 10:25:04 am (British Summer Time)",
+    "description": "New description goes here and now add a new part"
+  },
+  "paths": {
+    "/loanRequest/{counterPartyId}/{amountRequested}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/definitions/ResponseSchema"
+            },
+            "examples": {
+              "application/json": {
+                "counterPartyId": "123",
+                "status": "Pending",
+                "amountApproved": 0
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "counterPartyId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": ""
+          },
+          {
+            "name": "amountRequested",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": ""
+          }
+        ],
+        "operationId": "getLoanRequest_counterPartyId__amountRequested",
+        "description": "Here is a long description.2 and now some more and even more of a description.",
+        "summary": "Here is a summary"
+      }
+    }
+  },
+  "definitions": {
+    "ResponseSchema": {
+      "type": "object",
+      "properties": {
+        "counterPartyId": {
+          "type": "string",
+          "default": "123"
+        },
+        "status": {
+          "type": "string",
+          "default": "Pending"
+        },
+        "amountApproved": {
+          "type": "integer",
+          "default": 0
+        }
+      }
+    }
+  }
+}
