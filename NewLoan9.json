@@ -3,8 +3,8 @@
   "info": {
     "version": "1.0",
     "title": "NewLoan9",
-    "x-lastModified": "13 September 2024 4:28:00 pm (British Summer Time)",
-    "description": "New description goes here and now add a new part + 6"
+    "x-lastModified": "2024-09-17T09:14:22.000Z",
+    "description": "New description goes here and now add a new part + Hugo2"
   },
   "paths": {
     "/loanRequest/{counterPartyId}/{amountRequested}": {
