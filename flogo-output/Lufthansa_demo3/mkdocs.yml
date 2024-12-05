@@ -1,0 +1,8 @@
+site_name: "Lufthansa_demo3"
+site_description: "Integration application"
+
+nav:
+  - Introduction: index.md
+
+plugins:
+  - techdocs-core
