@@ -1,0 +1,8 @@
+site_name: "NewAPI_APP"
+site_description: "This integrates everything with everything"
+
+nav:
+  - Introduction: index.md
+
+plugins:
+  - techdocs-core
